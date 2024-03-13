@@ -1,8 +1,33 @@
 import Anthropic from "@anthropic-ai/sdk";
 import * as dotenv from "dotenv";
 import { TwitterApi } from "twitter-api-v2";
+import kigoSpring from "scraping-kigo/resultJson/spring.json" assert {
+	type: "json",
+};
+import kigoSummer from "scraping-kigo/resultJson/summer.json" assert {
+	type: "json",
+};
+import kigoFall from "scraping-kigo/resultJson/fall.json" assert {
+	type: "json",
+};
+import kigoWinter from "scraping-kigo/resultJson/winter.json" assert {
+	type: "json",
+};
+import kigoNewYear from "scraping-kigo/resultJson/newYear.json" assert {
+	type: "json",
+};
 
 dotenv.config();
+
+const TARGET_SEASON = "spring";
+
+const kigo = {
+	spring: kigoSpring,
+	summer: kigoSummer,
+	fall: kigoFall,
+	winter: kigoWinter,
+	newYear: kigoNewYear,
+};
 
 const anthropic = new Anthropic({
 	apiKey: process.env.ANTHROPIC_API_KEY,
@@ -25,10 +50,11 @@ const msg = await anthropic.messages.create({
 					「土筆」「桜」「犬」「蕗の薹」は禁止です。
 					季重なり(季語が１句に複数出現する)は避けてください。
 					季語が入っていれば「春」と言う言葉は入れなくていいです。
-					驚きや発見がある景で作ってください。
+					驚きや発見がある景、光を感じる光景で作ってください。
 					改行・スペースは不要です。
 					有季定型で作ってください。
 					字余り・字足らずは避けてください。
+
 					口語で作ってください。
 					前後の説明は不要です。`,
 				},

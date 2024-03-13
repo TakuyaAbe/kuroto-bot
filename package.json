@@ -9,6 +9,7 @@
 	"dependencies": {
 		"@anthropic-ai/sdk": "^0.17.1",
 		"dotenv": "^16.4.5",
+		"scraping-kigo": "github:AsazuTaiga/scraping-kigo",
 		"twitter-api-v2": "^1.16.0"
 	},
 	"engines": {
